@@ -358,7 +358,7 @@
 
         function loadRecentActivities() {
             const saved = localStorage.getItem('recentActivities');
-            return saved ? JSON.parse(saved) : ['writing'];
+            return saved ? JSON.parse(saved) : ['writing', 'reading', 'coding', 'revision', 'etc'];
         }
 
         function saveRecentActivity(activity) {
