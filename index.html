@@ -306,7 +306,7 @@
     <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
     <script>
         const DROPBOX_APP_KEY = 'evyhtrp9879xmbe';
-        const APP_VERSION = '0.4-5 2026-11-20';
+        const APP_VERSION = '0.4-6 2026-11-20';
         
         let dbx = null;
         let config = {
@@ -404,7 +404,7 @@
 
         function updateStartButton() {
             const activity = document.getElementById('activity').value.trim() || 'idea';
-            if (activity==="idea")
+            if (activity!=="idea")
                 document.getElementById('startBtn').textContent = `▶ START ${activity.toUpperCase()}`;
             else
                 document.getElementById('startBtn').textContent = `▶ LOG IDEA`;
