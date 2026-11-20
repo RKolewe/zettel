@@ -281,7 +281,7 @@
 
             <div class="activity-field">
                 <label>@</label>
-                <input type="text" id="activity" value="writing" autocomplete="off">
+                <input type="text" id="activity" value="idea" autocomplete="off">
                 <select id="activityPicker" aria-label="Pick activity"></select>
             </div>
 
@@ -290,7 +290,7 @@
             </div>
 
             <button class="btn-start" id="startBtn">
-                ▶ START WRITING
+                ▶ LOG IDEA
             </button>
 
             <button class="btn-done" id="doneBtn">
@@ -306,7 +306,7 @@
     <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
     <script>
         const DROPBOX_APP_KEY = 'evyhtrp9879xmbe';
-        const APP_VERSION = '0.4.1-5 2026-11-20';
+        const APP_VERSION = '0.4-5 2026-11-20';
         
         let dbx = null;
         let config = {
@@ -407,7 +407,7 @@
             if (activity==="idea")
                 document.getElementById('startBtn').textContent = `▶ START ${activity.toUpperCase()}`;
             else
-                document.getElementById('startBtn').textContent = `▶ LOG`;
+                document.getElementById('startBtn').textContent = `▶ LOG IDEA`;
         }
 
         // ── Config ────────────────────────────────────────────────
@@ -631,7 +631,7 @@
             document.getElementById('disconnectBtn').addEventListener('click', disconnect);
             document.getElementById('settingsToggle').addEventListener('click', toggleSettings);
             document.getElementById('startBtn').addEventListener('click', () => {
-                const activity = document.getElementById('activity').value.trim() || 'writing';
+                const activity = document.getElementById('activity').value.trim() || 'idea';
                 writeEntry(activity);
             });
             document.getElementById('doneBtn').addEventListener('click', () => writeEntry('done'));
