@@ -209,6 +209,16 @@
             font-size: 1rem;
         }
 
+        .activity-field select {
+            padding: 0.75rem 0.5rem;
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 1rem;
+            max-width: 2.5rem;
+        }
+
         .notes-field {
             margin: 1rem 0;
         }
@@ -259,12 +269,14 @@
                     <input type="text" id="folderPathLogger" placeholder="/timelogs">
                 </div>
                 <button class="btn-disconnect" id="disconnectBtn">Disconnect from Dropbox</button>
+                <h3>v 0.4-1</h3>
             </div>
 
             <div class="activity-field">
                 <label>@</label>
                 <input type="text" id="activity" value="writing" list="activityList" autocomplete="off">
                 <datalist id="activityList"></datalist>
+                <select id="activityPicker" aria-label="Pick activity"></select>
             </div>
 
             <div class="notes-field">
@@ -375,6 +387,19 @@
                 const option = document.createElement('option');
                 option.value = a;
                 datalist.appendChild(option);
+            });
+
+            const picker = document.getElementById('activityPicker');
+            picker.innerHTML = '';
+            const placeholder = document.createElement('option');
+            placeholder.value = '';
+            placeholder.textContent = '▾';
+            picker.appendChild(placeholder);
+            loadRecentActivities().forEach(a => {
+                const option = document.createElement('option');
+                option.value = a;
+                option.textContent = a;
+                picker.appendChild(option);
             });
         }
 
@@ -608,7 +633,14 @@
             document.getElementById('doneBtn').addEventListener('click', () => writeEntry('done'));
             document.getElementById('activity').addEventListener('input', updateStartButton);
             document.getElementById('activity').addEventListener('focus', e => e.target.select());
-            
+            document.getElementById('activityPicker').addEventListener('change', e => {
+                if (!e.target.value) return;
+                const activityInput = document.getElementById('activity');
+                activityInput.value = e.target.value;
+                updateStartButton();
+                e.target.value = '';
+            });
+
             updateActivityDatalist();
             updateStartButton();
         }
