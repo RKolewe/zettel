@@ -219,6 +219,13 @@
             max-width: 2.5rem;
         }
 
+        .version-footer {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #666;
+        }
+
         .notes-field {
             margin: 1rem 0;
         }
@@ -269,7 +276,7 @@
                     <input type="text" id="folderPathLogger" placeholder="/timelogs">
                 </div>
                 <button class="btn-disconnect" id="disconnectBtn">Disconnect from Dropbox</button>
-                <h3>v 0.4-1</h3>
+                <div class="version-footer" id="versionFooter"></div>
             </div>
 
             <div class="activity-field">
@@ -300,6 +307,7 @@
     <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
     <script>
         const DROPBOX_APP_KEY = 'evyhtrp9879xmbe';
+        const APP_VERSION = '0.4.1';
         
         let dbx = null;
         let config = {
@@ -393,7 +401,7 @@
             picker.innerHTML = '';
             const placeholder = document.createElement('option');
             placeholder.value = '';
-            placeholder.textContent = '▾';
+            placeholder.textContent = '';
             picker.appendChild(placeholder);
             loadRecentActivities().forEach(a => {
                 const option = document.createElement('option');
@@ -643,6 +651,7 @@
 
             updateActivityDatalist();
             updateStartButton();
+            document.getElementById('versionFooter').textContent = `v${APP_VERSION}`;
         }
 
         init();
