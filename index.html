@@ -306,7 +306,7 @@
     <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
     <script>
         const DROPBOX_APP_KEY = 'evyhtrp9879xmbe';
-        const APP_VERSION = '0.4.1 2026-11-20';
+        const APP_VERSION = '0.4.1-5 2026-11-20';
         
         let dbx = null;
         let config = {
@@ -403,8 +403,11 @@
         }
 
         function updateStartButton() {
-            const activity = document.getElementById('activity').value.trim() || 'writing';
-            document.getElementById('startBtn').textContent = `▶ START ${activity.toUpperCase()}`;
+            const activity = document.getElementById('activity').value.trim() || 'idea';
+            if (activity==="idea")
+                document.getElementById('startBtn').textContent = `▶ START ${activity.toUpperCase()}`;
+            else
+                document.getElementById('startBtn').textContent = `▶ LOG`;
         }
 
         // ── Config ────────────────────────────────────────────────
@@ -456,7 +459,9 @@
         }
 
         function createLogEntry(activity, notes = '') {
-            let entry = `${getTimestamp()} ${config.username} on ${config.hostname} @journal  @${activity}\n`;
+            let entry = `${getTimestamp()} ${config.username} on ${config.hostname}`;
+            if (activity !== 'idea') entry +=` @journal`
+            entry += `  @${activity}\n`
             if (notes) entry += `${notes}\n`;
             entry += ' \n';
             return entry;
