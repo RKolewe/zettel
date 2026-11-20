@@ -281,8 +281,7 @@
 
             <div class="activity-field">
                 <label>@</label>
-                <input type="text" id="activity" value="writing" list="activityList" autocomplete="off">
-                <datalist id="activityList"></datalist>
+                <input type="text" id="activity" value="writing" autocomplete="off">
                 <select id="activityPicker" aria-label="Pick activity"></select>
             </div>
 
@@ -307,7 +306,7 @@
     <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
     <script>
         const DROPBOX_APP_KEY = 'evyhtrp9879xmbe';
-        const APP_VERSION = '0.4.1 (2026-11-20)';
+        const APP_VERSION = '0.4.1-4 2026-11-20';
         
         let dbx = null;
         let config = {
@@ -389,14 +388,6 @@
         }
 
         function updateActivityDatalist() {
-            const datalist = document.getElementById('activityList');
-            datalist.innerHTML = '';
-            loadRecentActivities().forEach(a => {
-                const option = document.createElement('option');
-                option.value = a;
-                datalist.appendChild(option);
-            });
-
             const picker = document.getElementById('activityPicker');
             picker.innerHTML = '';
             const placeholder = document.createElement('option');
